@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MyFollow.Models
 {
@@ -23,6 +24,7 @@ namespace MyFollow.Models
         [StringLength(50)]
         public string TwitterHandler { get; set; }
         public virtual ICollection<Product> Products { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
     }
 }
