@@ -7,9 +7,9 @@ namespace MyFollow.Controllers
     {
         public ActionResult Index(ApplicationUser user)
         {
-            MyFollowContext db = new MyFollowContext();
-            db.Users.Add(user);
-            db.SaveChanges();
+         //   MyFollowContext db = new MyFollowContext();
+         //   db.Users.Add(user);
+         //   db.SaveChanges();
             return View();
         }
 
