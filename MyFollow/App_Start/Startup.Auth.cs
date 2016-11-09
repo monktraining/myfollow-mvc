@@ -3,22 +3,18 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OAuth;
+using Owin;
 using MyFollow.Identity;
 using MyFollow.Models;
-using Owin;
 
 namespace MyFollow
 {
     public partial class Startup
     {
-        public void Configure(IAppBuilder app)
+        // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
+        public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            app.CreatePerOwinContext(MyFollowContext.Create);
-            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
-            app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
-            app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
@@ -36,8 +32,8 @@ namespace MyFollow
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
             });
-            
-            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);           
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
             app.UseTwoFactorSignInCookie(DefaultAuthenticationTypes.TwoFactorCookie, TimeSpan.FromMinutes(5));
 
