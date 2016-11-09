@@ -5,9 +5,9 @@ namespace MyFollow.Models
 {
     public class MyFollowContext : IdentityDbContext<ApplicationUser>
     {
-        public MyFollowContext()
+        public MyFollowContext() : base("MyFollow", throwIfV1Schema: true)
         {
-            
+
         }
 
         public static MyFollowContext Create()

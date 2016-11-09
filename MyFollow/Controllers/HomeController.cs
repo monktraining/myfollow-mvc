@@ -5,11 +5,8 @@ namespace MyFollow.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(ApplicationUser user)
-        {
-            MyFollowContext db = new MyFollowContext();
-            db.Users.Add(user);
-            db.SaveChanges();
+        public ActionResult Index()
+        {            
             return View();
         }
 
@@ -24,6 +21,11 @@ namespace MyFollow.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult Login()
+        {
             return View();
         }
     }
