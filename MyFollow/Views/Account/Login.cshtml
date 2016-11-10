@@ -1,86 +1,42 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    @using MyFollow.Models
-    @model LoginViewModel
-    @{
-        ViewBag.Title = "Login";
-        Layout = null;
-    }
-    <link rel="stylesheet" href="/Content/css/vendor.css">
-    <script>
-            var themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) :
-            {};
-            var themeName = themeSettings.themeName || '';
-            if (themeName)
-            {
-                document.write('<link rel="stylesheet" id="theme-style" href="/Content/css/app-' + themeName + '.css">');
-            }
-            else
-            {
-                document.write('<link rel="stylesheet" id="theme-style" href="/Content/css/app.css">');
-            }
-    </script>
-</head>
-<body>
-    <div class="auth">
-        <div class="auth-container">
-            <div class="card">
-                <header class="auth-header">
-                    <h1 class="auth-title">
-                        <div class="logo"> <span class="l l1"></span> <span class="l l2"></span> <span class="l l3"></span> <span class="l l4"></span> <span class="l l5"></span> </div> @ViewBag.Title
-                    </h1>
-                </header>
-                <div class="auth-content">
-                    <p class="text-xs-center">Use a local account to login.</p>
-                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">  
-                            @Html.LabelFor(m => m.Email)
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control underlined", @placeholder = "Your email address" })
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "has-error" })
-                        </div>
-                        <div class="form-group"> 
-                            @Html.LabelFor(m => m.Password)
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control underlined", @placeholder = "Your password" })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "has-error" })
-                        </div>
-                        <div class="form-group">
-                            <label for="RememberMe">
-                                <input class="checkbox" id="RememberMe" name="RememberMe" type="checkbox">
-                                <span>Remember me</span>
-                            </label> 
-                            @*Enable this once you have account confirmation enabled for password reset functionality
-                            <a href="/Account/ForgotPassword" class="forgot-btn pull-right">Forgot password?</a>*@
-                        </div>
-                        <div class="form-group"> 
-                            <button type="submit" class="btn btn-block btn-primary">Login</button> 
-                        </div>
-                        <div class="form-group">
-                            <p class="text-muted text-xs-center">Do not have an account? 
-                                <a href="/Account/Register">Register!</a>
-                            </p>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-    !-- Reference block for JS --
-    <div class="ref" id="ref">
-        <div class="color-primary"></div>
-        <div class="chart">
-            <div class="color-primary"></div>
-            <div class="color-secondary"></div>
-        </div>
-    </div>
-    <script src="../../Scripts/vendor.js"></script>
-    <script src="../../Scripts/app.js"></script>
+﻿@using MyFollow.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "../Shared/_LayoutLogin.cshtml";
+}
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
+<div class="auth-content">
+    <p class="text-xs-center">Use a local account to login.</p>
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "has-error" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control underlined", @placeholder = "Your email address" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "has-error" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control underlined", @placeholder = "Your password" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "has-error" })
+        </div>
+        <div class="form-group">
+            <label for="RememberMe">
+                <input class="checkbox" id="RememberMe" name="RememberMe" type="checkbox">
+                <span>Remember me</span>
+            </label>
+            @*Enable this once you have account confirmation enabled for password reset functionality
+            <a href="/Account/ForgotPassword" class="forgot-btn pull-right">Forgot password?</a>*@
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-block btn-primary">Login</button>
+        </div>
+        <div class="form-group">
+            <p class="text-muted text-xs-center">
+                Do not have an account?
+                <a href="/Account/Register">Register!</a>
+            </p>
+        </div>
     }
-</body>
-</html>
+</div>
