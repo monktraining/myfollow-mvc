@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="/Content/css/vendor.css">
+    <script>
+            var themeSettings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) :
+            {};
+            var themeName = themeSettings.themeName || '';
+            if (themeName)
+            {
+                document.write('<link rel="stylesheet" id="theme-style" href="/Content/css/app-' + themeName + '.css">');
+            }
+            else
+            {
+                document.write('<link rel="stylesheet" id="theme-style" href="/Content/css/app.css">');
+            }
+    </script>
+    <link rel="stylesheet" href="/Content/css/site.css">
+</head>
+<body>
+    <div class="auth">
+        <div class="auth-container">
+            <div class="card">
+                <header class="auth-header">
+                    <h1 class="auth-title">
+                        <div class="logo"> <span class="l l1"></span> <span class="l l2"></span> <span class="l l3"></span> <span class="l l4"></span> <span class="l l5"></span> </div> @ViewBag.Title
+                    </h1>
+                </header>
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    !-- Reference block for JS --
+    <div class="ref" id="ref">
+        <div class="color-primary"></div>
+        <div class="chart">
+            <div class="color-primary"></div>
+            <div class="color-secondary"></div>
+        </div>
+    </div>
+    <script src="../../Scripts/vendor.js"></script>
+    <script src="../../Scripts/app.js"></script>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+</html>
